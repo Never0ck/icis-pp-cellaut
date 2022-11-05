@@ -1,4 +1,5 @@
-﻿namespace Cellaut.Presentation.MAUI
+﻿
+namespace Cellaut.Presentation.MAUI
 {
     public static class MauiProgram
     {
