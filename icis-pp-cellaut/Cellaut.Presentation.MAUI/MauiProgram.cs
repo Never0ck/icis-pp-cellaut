@@ -1,4 +1,6 @@
 ﻿
+using CommunityToolkit.Maui;
+
 namespace Cellaut.Presentation.MAUI
 {
     public static class MauiProgram
@@ -8,6 +10,7 @@ namespace Cellaut.Presentation.MAUI
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

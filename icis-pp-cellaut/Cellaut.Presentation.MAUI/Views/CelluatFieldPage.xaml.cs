@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +13,10 @@ public partial class CelluatFieldPage : ContentPage
     {
         InitializeComponent();
     }
-}
 
+    private void GraphicsView_OnEndInteraction(object sender, TouchEventArgs e)
+    {
+        var context = BindingContext as ViewModels.CellautFieldViewModel;
+        context.ClickOnField(sender, e);
+    }
+}

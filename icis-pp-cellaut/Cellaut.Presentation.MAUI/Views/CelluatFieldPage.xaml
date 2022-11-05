@@ -34,17 +34,36 @@
                 <Editor Text="{Binding CellCountY, Converter={StaticResource StringToIntConverter}}" />
                 <Label Text="{Binding CellCountY}" FontSize="15" />
             </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="Размер хоста в px по X:" FontSize="15"/>
+                <Editor Text="{Binding FieldWidth, Converter={StaticResource StringToIntConverter}}" />
+                <Label Text="{Binding FieldWidth}" FontSize="15" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="5">
+                <Label Text="Размер хоста в px по Y:" FontSize="15" />
+                <Editor Text="{Binding FieldHeiht, Converter={StaticResource StringToIntConverter}}" />
+                <Label Text="{Binding FieldHeiht}" FontSize="15" />
+            </HorizontalStackLayout>
             <StackLayout>
                 <Label Text="{Binding CellBorderWidth, StringFormat='Ширина границ:{0}'}" FontSize="18" Margin="5" />
-                <Slider Minimum ="0" Maximum="10" Value="{Binding CellBorderWidth}" 
-                MinimumTrackColor="DeepPink" MaximumTrackColor="LightPink" ThumbColor="DeepPink" />
-            </StackLayout>    
+                <Slider 
+                    Minimum ="0" 
+                    Maximum="10" 
+                    Value="{Binding CellBorderWidth}" 
+                    MinimumTrackColor="DeepPink" 
+                    MaximumTrackColor="LightPink" 
+                    ThumbColor="DeepPink" />
+            </StackLayout>
             <Button Command="{Binding CreateFieldCommand}" Text="Создать поле"/>
         </VerticalStackLayout>
         <GraphicsView 
+            WidthRequest="1200"
+            HeightRequest="900"
             Grid.Column="1" 
             Margin="10"
-            Drawable="{Binding GraphicsDrawable}" />
+            Drawable="{Binding GraphicsDrawable}"
+            EndInteraction="GraphicsView_OnEndInteraction">
+        </GraphicsView>
     </Grid>
 
 </ContentPage>
