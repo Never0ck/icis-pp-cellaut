@@ -1,13 +1,23 @@
+using System.ComponentModel;
+using Cellaut.Presentation.MAUI.Models;
+
 namespace Cellaut.Presentation.MAUI;
 
 public class GraphicsDrawable : IDrawable
 {
+    private readonly CellField _cellField;
     public int X_COUNT_CELLS { get; set; }
     public int Y_COUNT_CELLS { get; set; }
     public int CellBorderWidth { get; set; }
     public List<PointF> ColleredPoints { get; set; }
     public float CELL_HEIGHT { get; set; }
     public float CELL_WIDTH { get; set; }
+
+    public GraphicsDrawable(CellField cellField)
+    {
+        _cellField = cellField ?? throw new ArgumentNullException(nameof(cellField));
+    }
+
 
     public void CollerPoint(PointF pointF)
     {

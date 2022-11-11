@@ -5,13 +5,14 @@
              x:Class="Cellaut.Presentation.MAUI.Views.CelluatFieldPage"
              xmlns:viewModels="clr-namespace:Cellaut.Presentation.MAUI.ViewModels"
              xmlns:converters="clr-namespace:Cellaut.Presentation.MAUI.Converters"
-             xmlns:maui="clr-namespace:Cellaut.Presentation.MAUI">
+             xmlns:maui="clr-namespace:Cellaut.Presentation.MAUI"
+             xmlns:views="clr-namespace:Cellaut.Presentation.MAUI.Views">
     <ContentPage.BindingContext>
         <viewModels:CellautFieldViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Resources>
         <converters:StringToIntConverter x:Key="StringToIntConverter"/>
-        <maui:GraphicsDrawable x:Key="drawable" />
+        <!-- <maui:GraphicsDrawable x:Key="drawable" /> -->
     </ContentPage.Resources>
     <Grid Padding="10" ColumnSpacing="10">
         <Grid.ColumnDefinitions>
@@ -26,44 +27,31 @@
             <Label Text="Настройки:" FontSize="15" />
             <HorizontalStackLayout Spacing="5">
                 <Label Text="Кол-во клеток по X:" FontSize="15"/>
-                <Editor Text="{Binding CellCountX, Converter={StaticResource StringToIntConverter}}" />
-                <Label Text="{Binding CellCountX}" FontSize="15" />
+                <Editor Text="{Binding Field.CountX, Converter={StaticResource StringToIntConverter}}" />
+                <Label Text="{Binding Field.CountX}" FontSize="15" />
             </HorizontalStackLayout>
             <HorizontalStackLayout Spacing="5">
                 <Label Text="Кол-во клеток по Y:" FontSize="15" />
-                <Editor Text="{Binding CellCountY, Converter={StaticResource StringToIntConverter}}" />
-                <Label Text="{Binding CellCountY}" FontSize="15" />
-            </HorizontalStackLayout>
-            <HorizontalStackLayout Spacing="5">
-                <Label Text="Размер хоста в px по X:" FontSize="15"/>
-                <Editor Text="{Binding FieldWidth, Converter={StaticResource StringToIntConverter}}" />
-                <Label Text="{Binding FieldWidth}" FontSize="15" />
-            </HorizontalStackLayout>
-            <HorizontalStackLayout Spacing="5">
-                <Label Text="Размер хоста в px по Y:" FontSize="15" />
-                <Editor Text="{Binding FieldHeiht, Converter={StaticResource StringToIntConverter}}" />
-                <Label Text="{Binding FieldHeiht}" FontSize="15" />
+                <Editor Text="{Binding Field.CountY, Converter={StaticResource StringToIntConverter}}" />
+                <Label Text="{Binding Field.CountY}" FontSize="15" />
             </HorizontalStackLayout>
             <StackLayout>
-                <Label Text="{Binding CellBorderWidth, StringFormat='Ширина границ:{0}'}" FontSize="18" Margin="5" />
+                <Label Text="{Binding Field.BorderWidth, StringFormat='Ширина границ:{0}'}" FontSize="18" Margin="5" />
                 <Slider 
-                    Minimum ="0" 
+                    Minimum ="1" 
                     Maximum="10" 
-                    Value="{Binding CellBorderWidth}" 
+                    Value="{Binding Field.BorderWidth}" 
                     MinimumTrackColor="DeepPink" 
                     MaximumTrackColor="LightPink" 
                     ThumbColor="DeepPink" />
             </StackLayout>
             <Button Command="{Binding CreateFieldCommand}" Text="Создать поле"/>
         </VerticalStackLayout>
-        <GraphicsView 
-            WidthRequest="1200"
-            HeightRequest="900"
+        <views:CelluarGraphicsView
             Grid.Column="1" 
-            Margin="10"
-            Drawable="{Binding GraphicsDrawable}"
-            EndInteraction="GraphicsView_OnEndInteraction">
-        </GraphicsView>
+            Margin="20"
+            Drawable="{Binding Field}">
+        </views:CelluarGraphicsView>
     </Grid>
 
 </ContentPage>

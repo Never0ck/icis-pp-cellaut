@@ -54,15 +54,25 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\CelluarGraphicsView.xaml.cs">
+	    <DependentUpon>CelluarGraphicsView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\CelluatFieldPage.xaml.cs">
 	    <DependentUpon>CelluatFieldPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\CelluarGraphicsView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\CelluatFieldPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Models\" />
 	</ItemGroup>
 
 </Project>
