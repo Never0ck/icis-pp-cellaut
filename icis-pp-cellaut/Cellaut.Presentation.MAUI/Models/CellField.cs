@@ -64,8 +64,8 @@ public class CellField : BaseModel, IDrawable
         {
             var cell = GetCellByPoint(touch);
             cell.Togle();
-            OnPropertyChanged(nameof(Field));
         }
+        OnPropertyChanged(nameof(Field));
     }
 
     private Cell GetCellByPoint(PointF point)
@@ -116,12 +116,13 @@ public class CellField : BaseModel, IDrawable
 
     public void Draw(ICanvas canvas, RectF dirtyRect)
     {
+        canvas.Antialias = false;
         canvas.StrokeColor = Colors.Wheat;
         canvas.FillColor = Colors.Azure;
         canvas.StrokeSize = BorderWidth;
 
-        _cellWidth = dirtyRect.Width / CountX;
-        _cellHeight = dirtyRect.Height / CountY;
+        _cellWidth = MathF.Round(dirtyRect.Width / CountX);
+        _cellHeight = MathF.Round(dirtyRect.Height / CountY);
 
         canvas.DrawLine(new PointF(0, 0), new PointF(dirtyRect.Width, 0));
         canvas.DrawLine(new PointF(0, 0), new PointF(0, dirtyRect.Height));

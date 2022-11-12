@@ -12,7 +12,6 @@
     </ContentPage.BindingContext>
     <ContentPage.Resources>
         <converters:StringToIntConverter x:Key="StringToIntConverter"/>
-        <!-- <maui:GraphicsDrawable x:Key="drawable" /> -->
     </ContentPage.Resources>
     <Grid Padding="10" ColumnSpacing="10">
         <Grid.ColumnDefinitions>
@@ -25,16 +24,20 @@
 
         <VerticalStackLayout Grid.Column="0" Spacing="5">
             <Label Text="Настройки:" FontSize="15" />
-            <HorizontalStackLayout Spacing="5">
-                <Label Text="Кол-во клеток по X:" FontSize="15"/>
+            <StackLayout Spacing="10" Margin="0,5">
+                <HorizontalStackLayout Spacing="5">
+                    <Label Text="Кол-во клеток по X:" FontSize="15"/>
+                    <Label Text="{Binding Field.CountX}" FontSize="15" />
+                </HorizontalStackLayout>
                 <Editor Text="{Binding Field.CountX, Converter={StaticResource StringToIntConverter}}" />
-                <Label Text="{Binding Field.CountX}" FontSize="15" />
-            </HorizontalStackLayout>
-            <HorizontalStackLayout Spacing="5">
-                <Label Text="Кол-во клеток по Y:" FontSize="15" />
+            </StackLayout>
+            <StackLayout Spacing="10" Margin="0,5">
+                <HorizontalStackLayout Spacing="5">
+                    <Label Text="Кол-во клеток по Y:" FontSize="15" />
+                    <Label Text="{Binding Field.CountY}" FontSize="15" />
+                </HorizontalStackLayout>
                 <Editor Text="{Binding Field.CountY, Converter={StaticResource StringToIntConverter}}" />
-                <Label Text="{Binding Field.CountY}" FontSize="15" />
-            </HorizontalStackLayout>
+            </StackLayout>
             <StackLayout>
                 <Label Text="{Binding Field.BorderWidth, StringFormat='Ширина границ:{0}'}" FontSize="18" Margin="5" />
                 <Slider 
