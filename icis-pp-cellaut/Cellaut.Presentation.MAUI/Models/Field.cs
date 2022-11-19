@@ -1,8 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.ObjectModel;
-using System.Diagnostics.Metrics;
 
-namespace Cellaut.Domain
+namespace Cellaut.Presentation.MAUI.Models
 {
     public class Field : IEnumerable<Cell>, ICloneable
     {

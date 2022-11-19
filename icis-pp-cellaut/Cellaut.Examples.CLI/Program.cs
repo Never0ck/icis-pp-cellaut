@@ -27,7 +27,7 @@ using Cellaut.Domain;
 
 void Print(Field field)
 {
-    foreach (var row in field._cellField)
+    foreach (var row in field.CellField)
     {
         foreach (var cell in row)
         {

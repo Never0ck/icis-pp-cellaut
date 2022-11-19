@@ -48,7 +48,20 @@
                     MaximumTrackColor="LightPink" 
                     ThumbColor="DeepPink" />
             </StackLayout>
-            <Button Command="{Binding CreateFieldCommand}" Text="Создать поле"/>
+            <StackLayout>
+                <Label Text="{Binding Ms, StringFormat='Скорость автомата:{0}'}" FontSize="18" Margin="5" />
+                <Slider 
+                    Minimum ="100" 
+                    Maximum="2000" 
+                    Value="{Binding Ms}" 
+                    MinimumTrackColor="DeepPink" 
+                    MaximumTrackColor="LightPink" 
+                    ThumbColor="DeepPink" />
+            </StackLayout>
+            <Button Command="{Binding RandomCreateFieldCommand}" Text="Рандомное состояние"/>
+            <Button Command="{Binding NextStateFieldCommand}" Text="Следующее состоние"/>
+            <Button Command="{Binding StartGeneratingCommand}" Text="Старт"/>
+            <Button Command="{Binding EndGeneratingCommand}" Text="Стоп"/>
         </VerticalStackLayout>
         <views:CelluarGraphicsView
             Grid.Column="1" 

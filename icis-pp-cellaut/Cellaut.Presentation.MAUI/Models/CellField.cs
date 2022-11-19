@@ -1,8 +1,4 @@
-﻿using System.ComponentModel;
-using Cellaut.Domain;
-using Cell = Cellaut.Domain.Cell;
-
-namespace Cellaut.Presentation.MAUI.Models;
+﻿namespace Cellaut.Presentation.MAUI.Models;
 
 public class CellField : BaseModel, IDrawable
 {
@@ -14,13 +10,7 @@ public class CellField : BaseModel, IDrawable
     private float _cellWidth;
     private float _cellHeight;
     private Field _field;
-
-    /// <summary>
-    /// Двумерный массив клеток, где внешний массив -- X, где внутренний Y
-    /// </summary>
-    // [Obsolete]
-    // public List<List<Cell>> Field { get; set; }
-
+    private readonly IAutomaton _automaton;
 
     public Field Field
     {
@@ -28,9 +18,10 @@ public class CellField : BaseModel, IDrawable
         set => SetField(ref _field, value);
     }
 
-    public CellField()
+    public CellField(IAutomaton automaton)
     {
         _field = new Field(CountX, CountY);
+        _automaton = automaton;
     }
 
     public int BorderWidth
@@ -121,8 +112,8 @@ public class CellField : BaseModel, IDrawable
             y = 0f;
             foreach (var cell in rows)
             {
-                canvas.DrawLine(new PointF(0, y + _cellHeight), new PointF(dirtyRect.Width, y + _cellHeight));
-                canvas.DrawLine(new PointF(x + _cellWidth, 0), new PointF(x + _cellWidth, dirtyRect.Height));
+                // canvas.DrawLine(new PointF(0, y + _cellHeight), new PointF(dirtyRect.Width, y + _cellHeight));
+                // canvas.DrawLine(new PointF(x + _cellWidth, 0), new PointF(x + _cellWidth, dirtyRect.Height));
                 if (cell.IsAlive)
                 {
                     canvas.FillRectangle(x, y, _cellWidth, _cellHeight);
@@ -133,5 +124,17 @@ public class CellField : BaseModel, IDrawable
         }
         canvas.DrawLine(new PointF(0, dirtyRect.Height), new PointF(dirtyRect.Width, dirtyRect.Height));
         canvas.DrawLine(new PointF(dirtyRect.Width, 0), new PointF(dirtyRect.Width, dirtyRect.Height));
+    }
+
+    public void NextState()
+    {
+        _automaton.NextGeneration(Field);
+        OnPropertyChanged(nameof(Field));
+    }
+
+    public void RandomCreateField()
+    {
+        _field.RandomCreateField();
+        OnPropertyChanged(nameof(Field));
     }
 }

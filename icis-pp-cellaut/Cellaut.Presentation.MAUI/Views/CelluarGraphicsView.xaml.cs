@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cellaut.Presentation.MAUI.Models;
+﻿using Cellaut.Presentation.MAUI.Models;
 
 namespace Cellaut.Presentation.MAUI.Views;
 

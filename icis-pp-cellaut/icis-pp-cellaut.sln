@@ -5,11 +5,9 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cellaut.Domain", "Cellaut.Domain\Cellaut.Domain.csproj", "{D90C97E6-104D-4E38-902E-DA8BC02A7E37}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cellaut.Application", "Cellaut.Application\Cellaut.Application.csproj", "{9A6E1619-1379-4D30-824A-8E36E08D677D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cellaut.Presentation.MAUI", "Cellaut.Presentation.MAUI\Cellaut.Presentation.MAUI.csproj", "{F9699AD6-832D-46F8-9288-44868A574048}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cellaut.Examples.CLI", "Cellaut.Examples.CLI\Cellaut.Examples.CLI.csproj", "{A5D9E6BE-C83F-400C-BE12-30A5CA34449F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cellaut.Examples.CLI", "Cellaut.Examples.CLI\Cellaut.Examples.CLI.csproj", "{A5D9E6BE-C83F-400C-BE12-30A5CA34449F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,18 +31,6 @@ Global
 		{D90C97E6-104D-4E38-902E-DA8BC02A7E37}.Release|x64.Build.0 = Release|Any CPU
 		{D90C97E6-104D-4E38-902E-DA8BC02A7E37}.Release|x86.ActiveCfg = Release|Any CPU
 		{D90C97E6-104D-4E38-902E-DA8BC02A7E37}.Release|x86.Build.0 = Release|Any CPU
-		{9A6E1619-1379-4D30-824A-8E36E08D677D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9A6E1619-1379-4D30-824A-8E36E08D677D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9A6E1619-1379-4D30-824A-8E36E08D677D}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{9A6E1619-1379-4D30-824A-8E36E08D677D}.Debug|x64.Build.0 = Debug|Any CPU
-		{9A6E1619-1379-4D30-824A-8E36E08D677D}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{9A6E1619-1379-4D30-824A-8E36E08D677D}.Debug|x86.Build.0 = Debug|Any CPU
-		{9A6E1619-1379-4D30-824A-8E36E08D677D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9A6E1619-1379-4D30-824A-8E36E08D677D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9A6E1619-1379-4D30-824A-8E36E08D677D}.Release|x64.ActiveCfg = Release|Any CPU
-		{9A6E1619-1379-4D30-824A-8E36E08D677D}.Release|x64.Build.0 = Release|Any CPU
-		{9A6E1619-1379-4D30-824A-8E36E08D677D}.Release|x86.ActiveCfg = Release|Any CPU
-		{9A6E1619-1379-4D30-824A-8E36E08D677D}.Release|x86.Build.0 = Release|Any CPU
 		{F9699AD6-832D-46F8-9288-44868A574048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F9699AD6-832D-46F8-9288-44868A574048}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9699AD6-832D-46F8-9288-44868A574048}.Debug|Any CPU.Deploy.0 = Debug|Any CPU

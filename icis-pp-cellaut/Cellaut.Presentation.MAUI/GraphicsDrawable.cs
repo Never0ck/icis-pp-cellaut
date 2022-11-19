@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using Cellaut.Presentation.MAUI.Models;
 
 namespace Cellaut.Presentation.MAUI;
