@@ -1,14 +1,66 @@
 ﻿using System.Collections;
+using System.Collections.ObjectModel;
+using System.Diagnostics.Metrics;
 
 namespace Cellaut.Domain
 {
     public class Field : IEnumerable<Cell>, ICloneable
     {
-        public List<List<Cell>> _cellField;
+        private List<List<Cell>> _cellField;
+        public IReadOnlyList<IReadOnlyList<Cell>> CellField => _cellField;
 
         public Field(List<List<Cell>> cellField)
         {
             _cellField = cellField;
+        }
+
+        public Field(int countX, int countY)
+        {
+            _cellField = new List<List<Cell>>();
+            for (int y = 0; y < countY; y++)
+            {
+                var row = new List<Cell>();
+                _cellField.Add(row);
+                for (int x = 0; x < countX; x++)
+                {
+                    row.Add(new Cell());
+                }
+            }
+        }
+
+        public Cell this[int i, int j]
+        {
+            get => _cellField[i][j];
+        }
+
+        public void Resize(int CountX, int CountY)
+        {
+            if (CountX < _cellField.Count)
+            {
+                _cellField.RemoveRange(CountX, _cellField.Count - CountX);
+            }
+            else if (CountX > _cellField.Count)
+            {
+                if (CountX > _cellField.Capacity)
+                    _cellField.Capacity = CountX;
+
+                _cellField.AddRange(Enumerable.Range(0, CountX - _cellField.Count).Select(i => new List<Cell>()));
+            }
+
+            foreach (var col in _cellField)
+            {
+                if (CountY < col.Count)
+                {
+                    col.RemoveRange(CountY, col.Count - CountY);
+                }
+                else if (CountY > col.Count)
+                {
+                    if (CountY > col.Capacity)
+                        col.Capacity = CountY;
+
+                    col.AddRange(Enumerable.Range(0, CountY - col.Count).Select(i => new Cell()));
+                }
+            }
         }
 
         /// <summary>
@@ -147,6 +199,11 @@ namespace Cellaut.Domain
             }
 
             return new Field(buf);
+        }
+
+        public void Togle(int x, int y)
+        {
+            _cellField[x][y] = _cellField[x][y].Togle();
         }
     }
 }

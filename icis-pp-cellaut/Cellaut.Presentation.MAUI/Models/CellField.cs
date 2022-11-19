@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using Cellaut.Domain;
+using Cell = Cellaut.Domain.Cell;
 
 namespace Cellaut.Presentation.MAUI.Models;
 
@@ -11,15 +13,24 @@ public class CellField : BaseModel, IDrawable
 
     private float _cellWidth;
     private float _cellHeight;
+    private Field _field;
 
     /// <summary>
     /// Двумерный массив клеток, где внешний массив -- X, где внутренний Y
     /// </summary>
-    public List<List<Cell>> Field { get; set; }
+    // [Obsolete]
+    // public List<List<Cell>> Field { get; set; }
+
+
+    public Field Field
+    {
+        get => _field;
+        set => SetField(ref _field, value);
+    }
 
     public CellField()
     {
-        Field = new List<List<Cell>> { new() { new Cell() } };
+        _field = new Field(CountX, CountY);
     }
 
     public int BorderWidth
@@ -33,7 +44,7 @@ public class CellField : BaseModel, IDrawable
         get => _countX;
         set { 
             SetField(ref _countX, value);
-            Resize();
+            Field.Resize(CountX, CountY);
         }
     }
 
@@ -43,7 +54,7 @@ public class CellField : BaseModel, IDrawable
         set
         {
             SetField(ref _countY, value);
-            Resize();
+            Field.Resize(CountX, CountY);
         }
     }
 
@@ -62,13 +73,15 @@ public class CellField : BaseModel, IDrawable
     {
         foreach (var touch in e.Touches)
         {
-            var cell = GetCellByPoint(touch);
-            cell.Togle();
+            var (x, y) = GetXYFromPoint(touch);
+            Field.Togle(x, y);
+            // var cell = GetCellByPoint(touch);
+            // cell.Togle();
         }
         OnPropertyChanged(nameof(Field));
     }
 
-    private Cell GetCellByPoint(PointF point)
+    private (int, int) GetXYFromPoint(PointF point)
     {
         var x = (int)(point.X / _cellWidth) - 1;
         if (point.X % _cellWidth > 0) x++;
@@ -76,42 +89,13 @@ public class CellField : BaseModel, IDrawable
         var y = (int)(point.Y / _cellHeight) - 1;
         if (point.Y % _cellHeight > 0) y++;
 
-        return Field[x][y];
+        return (x, y);
     }
 
     protected override void OnPropertyChanged(string propertyName = null)
     {
         base.OnPropertyChanged(propertyName);
-        View.Invalidate();
-    }
-
-    private void Resize()
-    {
-        if (CountX < Field.Count)
-        {
-            Field.RemoveRange(CountX, Field.Count - CountX);
-        } else if (CountX > Field.Count)
-        {
-            if (CountX > Field.Capacity)
-                Field.Capacity = CountX;
-
-            Field.AddRange(Enumerable.Range(0, CountX - Field.Count).Select(i => new List<Cell>()));
-        }
-
-        foreach (var col in Field)
-        {
-            if (CountY < col.Count)
-            {
-                col.RemoveRange(CountY, col.Count - CountY);
-            }
-            else if (CountY > col.Count)
-            {
-                if (CountY > col.Capacity)
-                    col.Capacity = CountY;
-
-                col.AddRange(Enumerable.Range(0, CountY - col.Count).Select(i => new Cell()));
-            }
-        }
+        View?.Invalidate();
     }
 
     public void Draw(ICanvas canvas, RectF dirtyRect)
@@ -121,8 +105,10 @@ public class CellField : BaseModel, IDrawable
         canvas.FillColor = Colors.Azure;
         canvas.StrokeSize = BorderWidth;
 
-        _cellWidth = MathF.Round(dirtyRect.Width / CountX);
-        _cellHeight = MathF.Round(dirtyRect.Height / CountY);
+        // _cellWidth = MathF.Round(dirtyRect.Width / CountX);
+        _cellWidth = dirtyRect.Width / CountX;
+        // _cellHeight = MathF.Round(dirtyRect.Height / CountY);
+        _cellHeight = dirtyRect.Height / CountY;
 
         canvas.DrawLine(new PointF(0, 0), new PointF(dirtyRect.Width, 0));
         canvas.DrawLine(new PointF(0, 0), new PointF(0, dirtyRect.Height));
@@ -130,7 +116,7 @@ public class CellField : BaseModel, IDrawable
         var y = 0f;
         var x = 0f;
 
-        foreach (var rows in Field)
+        foreach (var rows in Field.CellField)
         {
             y = 0f;
             foreach (var cell in rows)
